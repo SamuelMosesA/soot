@@ -8,6 +8,20 @@
 		</targets>
 	</edge>
 
+	<edge type="THREAD">
+		<source invoketype="instance" subsignature="void start()"/>
+		<targets>
+			<indirect target-position="base"
+					  subsignature="void &lt;init&gt;(java.lang.Runnable)">
+				<direct
+					subsignature="void run()"
+					target-position="argument" index="0"/>
+			</indirect>
+		</targets>
+	</edge>
+
+
+
 	<!-- execute and post methods -->
 	<edge type="EXECUTOR">
 		<source invoketype="instance"
@@ -17,6 +31,85 @@
 				index="0" />
 		</targets>
 	</edge>
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.concurrent.Future submit(java.lang.Runnable)"/>
+		<targets>
+			<direct subsignature="void run()" target-position="argument"
+					index="0" />
+		</targets>
+	</edge>
+
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.concurrent.Future submit(java.lang.Runnable,java.lang.Object)"/>
+		<targets>
+			<direct subsignature="void run()" target-position="argument"
+					index="0" />
+		</targets>
+	</edge>
+
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.concurrent.Future submit(java.util.concurrent.Callable)"/>
+		<targets>
+			<direct subsignature="java.lang.Object call()" target-position="argument"
+					index="0"/>
+		</targets>
+	</edge>
+
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.concurrent.ScheduledFuture schedule(java.util.concurrent.Callable,long,java.util.concurrent.TimeUnit)"/>
+		<targets>
+			<direct subsignature="java.lang.Object call()" target-position="argument"
+					index="0"/>
+		</targets>
+	</edge>
+
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.concurrent.ScheduledFuture schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit)"/>
+		<targets>
+			<direct subsignature="void run()" target-position="argument"
+					index="0"/>
+		</targets>
+	</edge>
+
+
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.concurrent.ScheduledFuture scheduleAtFixedRate(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)"/>
+		<targets>
+			<direct subsignature="void run()" target-position="argument"
+					index="0"/>
+		</targets>
+	</edge>
+
+
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.concurrent.ScheduledFuture 	scheduleWithFixedDelay(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)"/>
+		<targets>
+			<direct subsignature="void run()" target-position="argument"
+					index="0"/>
+		</targets>
+	</edge>
+
+	<!--
+	These function calls must be handled later. Current infra does not handle them
+
+	-->
+	<!--
+	<edge type="EXECUTOR">
+		<source invoketype="instance"
+				subsignature="java.util.List invokeAll(java.util.Collection)" />
+		<targets>
+
+		</targets>
+	</edge>
+-->
+
 	<edge type="EXECUTOR">
 		<source invoketype="instance"
 			subsignature="boolean post(java.lang.Runnable)" />
